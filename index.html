@@ -14,7 +14,7 @@
         :root {
             --primary-dark: #1a3a3a; /* Hijau paling gelap, untuk tombol utama dan header */
             --primary-color: #2F4F4F; /* Hijau gelap standar, untuk teks utama/border aktif */
-            --accent-color: #00796B; /* Aksen Hijau Teal Baru, lebih tegas */
+            --accent-color: #00796B; /* Aksen Hijau Teal BARU & TEGAS */
             --light-bg: #F0F4F7; /* Background utama: Abu-abu sangat muda */
             --input-bg-color: #FFFFFF; /* Background input: Putih */
             --border-color-light: #CFD8DC; /* Border input: Abu-abu terang */
@@ -45,7 +45,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
-        /* Logo */
         .logo-container {
             text-align: center;
             margin-bottom: 20px;
@@ -88,11 +87,6 @@
             transition: box-shadow 0.3s ease;
         }
 
-        .card:hover {
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Section Headers */
         h5.text-dark-blue {
             color: var(--primary-color) !important;
             font-weight: 700;
@@ -103,7 +97,6 @@
             margin-bottom: 20px;
         }
         
-        /* Step Indicator */
         .step-indicator {
             display: flex;
             justify-content: space-between;
@@ -118,6 +111,7 @@
             align-items: center;
             width: 30%;
             position: relative;
+            z-index: 1;
         }
 
         .step-indicator .step-circle {
@@ -133,38 +127,6 @@
             z-index: 10;
             transition: background-color 0.3s;
             border: 3px solid white;
-        }
-
-        .step-indicator .step-label {
-            margin-top: 5px;
-            font-size: 0.85rem;
-            text-align: center;
-            color: #999;
-            font-weight: 500;
-        }
-
-        .step-indicator .step.active .step-circle {
-            background-color: var(--primary-dark);
-            box-shadow: 0 0 0 5px rgba(26, 58, 58, 0.1);
-        }
-        
-        .step-indicator .step.complete .step-circle {
-            background-color: var(--accent-color);
-        }
-        
-        .step-indicator .step-line {
-            position: absolute;
-            top: 17px;
-            left: 50%;
-            width: 100%;
-            height: 3px;
-            background-color: #e0e0e0;
-            z-index: 5;
-            transform: translateX(-50%);
-        }
-
-        .step-indicator .step:not(:last-child) .step-line {
-            width: 100%;
         }
         
         /* Input Fields */
@@ -183,44 +145,113 @@
             min-height: 100px;
             padding: 15px 20px;
         }
+        
+        /* ----------------------------------------------------- */
+        /* --- PERBAIKAN KRITIS: MENGUBAH BIRU BAWAAN KE HIJAU --- */
+        /* ----------------------------------------------------- */
 
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(47, 79, 79, 0.1);
-            background-color: white;
-            outline: none;
+        /* 1. MENGGANTI GARIS/SHADOW BIRU SAAT INPUT FOKUS (TERMASUK DROPDOWN) */
+        .form-control:focus, 
+        .form-select:focus,
+        textarea:focus {
+            border-color: var(--accent-color); /* Border HIJAU */
+            /* Mengganti box-shadow biru bawaan Bootstrap */
+            box-shadow: 0 0 0 0.25rem rgba(0, 121, 107, 0.25); /* Shadow HIJAU */
         }
 
-        /* File Input Custom */
-        .custom-input-file {
-            height: auto !important;
-            padding: 14px 24px !important;
-            cursor: pointer;
-            border-radius: 15px !important;
+        /* 2. MENGGANTI WARNA RADIO/CHECKBOX SAAT TERPILIH (Titik Biru Bawaan) */
+        .form-check-input:checked {
+            background-color: var(--accent-color); /* Background HIJAU */
+            border-color: var(--accent-color); /* Border HIJAU */
+        }
+        /* Memastikan warna centang list persyaratan di Step 1 juga hijau */
+        .text-success {
+            color: var(--accent-color) !important;
         }
 
-        .custom-input-file::file-selector-button {
-            background: var(--primary-dark);
-            color: white;
-            border: none;
+        /* 3. MENGGANTI WARNA ALERT (jika ada alert-info yang berwarna biru muda) */
+        .alert-info {
+            --bs-alert-bg: #e0f2f1;
+            --bs-alert-color: var(--primary-color);
+            --bs-alert-border-color: #b2dfdb;
+        }
+
+        /* ----------------------------------------------------- */
+        /* --- PERBAIKAN STYLING KHUSUS UNTUK DROPDOWN TAHUN --- */
+        /* ----------------------------------------------------- */
+        .input-year-container {
+            position: relative;
+        }
+        
+        /* Dropdown custom */
+        .year-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            float: left;
+            min-width: 100%;
+            padding: 0;
+            margin: 5px 0 0;
+            font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+            max-height: 250px;
+            overflow-y: auto;
+            display: none; /* Awalnya tersembunyi */
+        }
+
+        .year-dropdown-item {
+            display: block;
+            width: 100%;
             padding: 8px 20px;
-            border-radius: 10px;
-            margin-right: 15px;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            transition: background-color 0.15s ease-in-out;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
         }
 
-        .custom-input-file::file-selector-button:hover {
-            background: var(--primary-color);
+        .year-dropdown-item:hover,
+        .year-dropdown-item.selected {
+            color: #fff;
+            background-color: var(--accent-color);
         }
 
+        /* Ikon Kalender Kustom */
+        .input-year-container .form-control {
+            cursor: pointer; /* Menunjukkan bahwa input dapat diklik */
+        }
+        
+        .input-year-container::after {
+            font-family: "bootstrap-icons";
+            content: "\f282"; /* bi-caret-down-fill (panah ke bawah) */
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            pointer-events: none; 
+            font-size: 1.2rem;
+            z-index: 5;
+        }
+        
         /* Label dengan Icon */
-        .icon-label {
+        .form-label.icon-label {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px; 
             color: var(--primary-color);
             font-size: 0.9rem;
             font-weight: 600;
@@ -242,7 +273,7 @@
             font-size: 1.1rem;
         }
 
-        /* Custom Button (Primary) */
+        /* Custom Button */
         .custom-button {
             background: var(--primary-dark);
             border: none;
@@ -257,18 +288,6 @@
             overflow: hidden;
         }
 
-        .custom-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .custom-button:hover {
-            background: var(--primary-color);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Secondary/Back Button */
         .btn-secondary-custom {
             background-color: #f8f8f8 !important;
             color: var(--primary-color) !important;
@@ -279,18 +298,12 @@
             transition: all 0.3s;
             font-size: 1.1rem;
         }
-
-        .btn-secondary-custom:hover {
-            background-color: #f0f0f0 !important;
-            border-color: var(--primary-color) !important;
-        }
         
-        /* Modal */
-        .modal-success .modal-header {
-            background: var(--primary-dark);
-            color: white;
-            border: none;
-            padding: 25px 30px;
+        @media (max-width: 576px) {
+            .btn-group-nav {
+                flex-direction: column;
+                gap: 15px !important;
+            }
         }
     </style>
 </head>
@@ -309,21 +322,7 @@
             <div class="card p-4 shadow-sm w-100" style="max-width: 600px;">
                 
                 <div class="step-indicator">
-                    <div class="step active" id="step1-indicator">
-                        <div class="step-circle">1</div>
-                        <div class="step-label">Intro</div>
                     </div>
-                    <div class="step-line"></div>
-                    <div class="step" id="step2-indicator">
-                        <div class="step-circle">2</div>
-                        <div class="step-label">Data & KTA</div>
-                    </div>
-                    <div class="step-line"></div>
-                    <div class="step" id="step3-indicator">
-                        <div class="step-circle">3</div>
-                        <div class="step-label">Kontribusi</div>
-                    </div>
-                </div>
 
                 <form id="registrationForm" enctype="multipart/form-data">
 
@@ -341,9 +340,9 @@
                         <button type="button" class="btn w-100 custom-button mt-4" onclick="nextStep(2)">
                             <span>Mulai Pendaftaran <i class="bi bi-arrow-right-circle-fill ms-2"></i></span>
                         </button>
-                        </div>
+                    </div>
 
-                    <div class="form-step" id="step2">
+                    <div class="form-step" id="step2" style="display: none;">
                         <h5 class="mb-3 text-dark-blue">Data Pribadi & KTA</h5>
                         
                         <div class="mb-3">
@@ -352,10 +351,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="angkatan_kuliah" class="form-label icon-label"><i class="bi bi-calendar-range-fill"></i> Angkatan Kuliah <span class="required-asterisk">*</span></label>
-                            <input type="number" class="form-control" id="angkatan_kuliah" name="angkatan_kuliah" placeholder="Tahun masuk kuliah (Cth: 2016)" required min="1980" max="2099">
+                            <label for="angkatan_kuliah" class="form-label icon-label"><i class="bi bi-calendar-range-fill"></i> Tahun Lulus Kuliah <span class="required-asterisk">*</span></label>
+                            <div class="input-year-container">
+                                <input type="text" class="form-control" id="angkatan_kuliah" name="angkatan_kuliah" placeholder="Pilih Tahun Lulus Kuliah (YYYY)" readonly required>
+                                
+                                <div id="year-dropdown" class="year-dropdown-menu">
+                                    </div>
+                            </div>
                         </div>
-                        
                         <div class="mb-3">
                             <label for="no_wa" class="form-label icon-label"><i class="bi bi-whatsapp"></i> No WA Aktif <span class="required-asterisk">*</span></label>
                             <input type="tel" class="form-control" id="no_wa" name="no_wa" placeholder="Cth: 081234567890" required>
@@ -374,10 +377,25 @@
                         </div>
                         
                         <div class="mb-3">
-                            <label for="alamat_pengiriman" class="form-label icon-label"><i class="bi bi-house-door-fill"></i> Alamat Pengiriman KTA <span class="required-asterisk">*</span></label>
-                            <textarea class="form-control" id="alamat_pengiriman" name="alamat_pengiriman" rows="3" placeholder="Alamat lengkap pengiriman KTA" required></textarea>
-                        </div>
+                            <label class="form-label icon-label"><i class="bi bi-box-seam-fill"></i> Metode Pengiriman KTA <span class="required-asterisk">*</span></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengiriman_ambil" value="Diambil Sendiri" required onclick="toggleAlamatField(false)" checked>
+                                <label class="form-check-label" for="pengiriman_ambil">
+                                    Diambil sendiri (Gedung Kesenian Terpadu Lantai 2 Politeknik Negeri Semarang)
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengiriman_antar" value="Diantar" onclick="toggleAlamatField(true)">
+                                <label class="form-check-label" for="pengiriman_antar">
+                                    Diantar ke Alamat
+                                </label>
+                            </div>
 
+                            <div id="alamat-field-container" style="display: none;">
+                                <label for="alamat_pengiriman" class="form-label icon-label"><i class="bi bi-geo-alt-fill"></i> Alamat Lengkap Pengiriman <span class="required-asterisk">*</span></label>
+                                <textarea class="form-control" id="alamat_pengiriman" name="alamat_pengiriman" rows="3" placeholder="Alamat lengkap pengiriman KTA (Jalan, No. Rumah, Kel/Desa, Kec, Kota, Kode Pos)" disabled></textarea>
+                            </div>
+                        </div>
                         <div class="mb-4">
                             <label for="jumlah_pembelian" class="form-label icon-label"><i class="bi bi-credit-card-fill"></i> Jumlah KTA (pcs) <span class="required-asterisk">*</span></label>
                             <input type="number" class="form-control" id="jumlah_pembelian" name="jumlah_pembelian" placeholder="Jumlah KTA yang dipesan" required min="1">
@@ -395,18 +413,18 @@
                             <input class="form-control custom-input-file" type="file" id="bukti_transfer_kta" name="bukti_transfer_kta" accept=".pdf, .png, .jpg, .jpeg" required>
                         </div>
                         
-                        <div class="d-flex justify-content-between gap-3 mt-4">
-                            <button type="button" class="btn btn-secondary-custom rounded-pill px-5" onclick="prevStep(1)">
+                        <div class="d-flex justify-content-between btn-group-nav mt-4">
+                            <button type="button" class="btn btn-secondary-custom rounded-pill px-5 flex-fill" onclick="prevStep(1)">
                                 <i class="bi bi-arrow-left-circle-fill me-2"></i> Sebelumnya
                             </button>
-                            <button type="button" class="btn custom-button rounded-pill" onclick="validateStep2()">
+                            <button type="button" class="btn custom-button rounded-pill flex-fill" onclick="validateStep2()">
                                 <span>Lanjut ke Kontribusi <i class="bi bi-arrow-right-circle-fill ms-2"></i></span>
                             </button>
                         </div>
                         <div id="message2" class="mt-3 text-center"></div>
-                        </div>
+                    </div>
 
-                    <div class="form-step" id="step3">
+                    <div class="form-step" id="step3" style="display: none;">
                         <h5 class="mb-3 text-dark-blue">Kontribusi Donasi</h5>
 
                         <div class="mb-4">
@@ -436,16 +454,16 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between gap-3 mt-4">
-                            <button type="button" class="btn btn-secondary-custom rounded-pill px-5" onclick="prevStep(2)">
+                        <div class="d-flex justify-content-between btn-group-nav mt-4">
+                            <button type="button" class="btn btn-secondary-custom rounded-pill px-5 flex-fill" onclick="prevStep(2)">
                                 <i class="bi bi-arrow-left-circle-fill me-2"></i> Sebelumnya
                             </button>
-                            <button type="submit" class="btn custom-button rounded-pill">
+                            <button type="submit" class="btn custom-button rounded-pill flex-fill">
                                 <span>Kirim Pendaftaran <i class="bi bi-check-circle-fill ms-2"></i></span>
                             </button>
                         </div>
                         <div id="message3" class="mt-3 text-center"></div>
-                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -476,7 +494,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
@@ -484,6 +501,10 @@
         const totalSteps = 3;
         const form = document.getElementById('registrationForm');
         const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        const alamatContainer = document.getElementById('alamat-field-container');
+        const alamatTextarea = document.getElementById('alamat_pengiriman');
+        const angkatanKuliahInput = document.getElementById('angkatan_kuliah'); // Target Input
+        const yearDropdown = document.getElementById('year-dropdown'); // Target Dropdown
 
         function updateFormSteps() {
             document.querySelectorAll('.form-step').forEach(step => {
@@ -512,10 +533,24 @@
             updateFormSteps();
         }
 
+        function toggleAlamatField(show) {
+            if (show) {
+                alamatContainer.style.display = 'block';
+                alamatTextarea.setAttribute('required', 'required');
+                alamatTextarea.removeAttribute('disabled');
+            } else {
+                alamatContainer.style.display = 'none';
+                alamatTextarea.removeAttribute('required');
+                alamatTextarea.setAttribute('disabled', 'disabled');
+                alamatTextarea.value = '';
+                alamatTextarea.classList.remove('is-invalid');
+            }
+        }
+        
         function validateStep2() {
             const fields = [
                 'nama_lengkap', 'angkatan_kuliah', 'no_wa', 'jurusan', 
-                'alamat_pengiriman', 'jumlah_pembelian', 'foto_profil', 'bukti_transfer_kta'
+                'jumlah_pembelian', 'foto_profil', 'bukti_transfer_kta'
             ];
             let isValid = true;
             
@@ -523,6 +558,7 @@
                 const field = document.getElementById(fieldId);
                 const isFile = field.type === 'file';
 
+                // Check required fields (termasuk input tahun yang sudah diisi value-nya)
                 if (field.required && ((!isFile && field.value.trim() === '') || (isFile && field.files.length === 0))) {
                     isValid = false;
                     field.classList.add('is-invalid');
@@ -531,11 +567,33 @@
                 }
             });
 
+            // Check Angkatan Kuliah format (should be 4 digits year)
+            const yearValue = angkatanKuliahInput.value.trim();
+            const currentYear = new Date().getFullYear() + 4; // Lulus bisa sampai 4 tahun ke depan jika angkatan baru
+            if (yearValue.length !== 4 || isNaN(yearValue) || parseInt(yearValue) < 1980 || parseInt(yearValue) > currentYear) {
+                isValid = false;
+                angkatanKuliahInput.classList.add('is-invalid');
+            } else {
+                angkatanKuliahInput.classList.remove('is-invalid');
+            }
+
+
+            const isDiantar = document.getElementById('pengiriman_antar').checked;
+            if (isDiantar) {
+                if (alamatTextarea.value.trim() === '') {
+                    isValid = false;
+                    alamatTextarea.classList.add('is-invalid');
+                } else {
+                    alamatTextarea.classList.remove('is-invalid');
+                }
+            }
+
+
             if (isValid) {
                 nextStep(3);
                 document.getElementById('message2').innerHTML = '';
             } else {
-                document.getElementById('message2').innerHTML = '<div class="alert alert-danger small py-2 mt-3"><i class="bi bi-exclamation-triangle-fill me-2"></i>Harap lengkapi semua data wajib diisi.</div>';
+                document.getElementById('message2').innerHTML = '<div class="alert alert-danger small py-2 mt-3"><i class="bi bi-exclamation-triangle-fill me-2"></i>Harap lengkapi semua data wajib diisi dengan benar.</div>';
             }
         }
         
@@ -554,14 +612,77 @@
                 buktiTransferDonasi.removeAttribute('required');
                 jumlahDonasi.value = '';
                 buktiTransferDonasi.value = '';
+                jumlahDonasi.classList.remove('is-invalid');
+                buktiTransferDonasi.classList.remove('is-invalid');
             }
         }
+
+
+        // --- FUNGSI DROPDOWN TAHUN KUSTOM BARU ---
+        
+        function populateYearDropdown() {
+            const startYear = 1980; 
+            const endYear = new Date().getFullYear() + 4; // Anggap maksimal tahun lulus adalah 4 tahun ke depan
+            yearDropdown.innerHTML = ''; 
+
+            for (let year = endYear; year >= startYear; year--) {
+                const item = document.createElement('a');
+                item.classList.add('year-dropdown-item');
+                item.href = 'javascript:void(0)'; // Non-link behavior
+                item.textContent = year;
+                item.setAttribute('data-year', year);
+                yearDropdown.appendChild(item);
+            }
+        }
+        
+        function toggleYearDropdown(show) {
+            yearDropdown.style.display = show ? 'block' : 'none';
+        }
+
+        function handleYearSelection(event) {
+            const target = event.target;
+            if (target.classList.contains('year-dropdown-item')) {
+                const selectedYear = target.getAttribute('data-year');
+                angkatanKuliahInput.value = selectedYear;
+                angkatanKuliahInput.classList.remove('is-invalid'); // Hapus pesan error jika ada
+                toggleYearDropdown(false);
+            }
+        }
+
+        // Panggil saat input diklik
+        angkatanKuliahInput.addEventListener('click', function(e) {
+            e.stopPropagation(); // Stop event propagation
+            toggleYearDropdown(true);
+            
+            // Highlight tahun yang sudah dipilih
+            document.querySelectorAll('.year-dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+                if (item.getAttribute('data-year') === this.value) {
+                    item.classList.add('selected');
+                    // Scroll ke tahun yang dipilih
+                    item.parentNode.scrollTop = item.offsetTop - item.parentNode.offsetTop - item.parentNode.offsetHeight / 2;
+                }
+            });
+        });
+        
+        // Panggil saat klik di luar dropdown untuk menutupnya
+        document.addEventListener('click', function(e) {
+            if (!yearDropdown.contains(e.target) && e.target !== angkatanKuliahInput) {
+                toggleYearDropdown(false);
+            }
+        });
+        
+        // Panggil saat item dropdown dipilih
+        yearDropdown.addEventListener('click', handleYearSelection);
+
+
+        // --- AKHIR FUNGSI DROPDOWN TAHUN KUSTOM ---
+
 
         // Handle Final Submit
         form.addEventListener('submit', function(event) {
             event.preventDefault(); 
             
-            // Validasi Donasi radio button
             const donasiRadios = document.getElementsByName('bersedia_donasi');
             let isDonasiSelected = false;
             donasiRadios.forEach(radio => {
@@ -583,12 +704,16 @@
                 currentStep = 1;
                 updateFormSteps();
                 toggleDonationFields(false);
+                toggleAlamatField(false);
+                document.getElementById('pengiriman_ambil').checked = true;
+                toggleYearDropdown(false); // Pastikan dropdown tertutup setelah reset
             }, 3000); 
         });
 
         // Initialize form
+        populateYearDropdown(); // Isi daftar tahun saat load
         updateFormSteps();
-        
+        toggleAlamatField(false);
     </script>
 </body>
 </html>
