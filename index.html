@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+
         /* --- DEFINISI WARNA TEMA HIJAU GELAP --- */
         :root {
             --primary-dark: #1a3a3a; /* Hijau paling gelap, untuk tombol utama dan header */
@@ -308,6 +309,10 @@
     </style>
 </head>
 <body>
+     <form id="registrationForm" 
+                         action="http://127.0.0.1:8000/api/alumni" 
+                         method="POST" 
+                         enctype="multipart/form-data">
     <div class="container-fluid min-vh-100 d-flex flex-column">
         
         <div class="header-section text-center">
@@ -322,13 +327,8 @@
             <div class="card p-4 shadow-sm w-100" style="max-width: 600px;">
                 
                 <div class="step-indicator">
-                    <form id="registrationForm" 
-                         action="http://127.0.0.1:8000/api/alumni" 
-                         method="POST" 
-                         enctype="multipart/form-data">
+    
                     </div>
-
-                <form id="registrationForm" enctype="multipart/form-data">
 
                     <div class="form-step active" id="step1">
                         <h5 class="mb-3 text-dark-blue">Selamat Datang Alumni!</h5>
@@ -719,5 +719,6 @@
         updateFormSteps();
         toggleAlamatField(false);
     </script>
+    </form>
 </body>
 </html>
