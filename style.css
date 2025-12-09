@@ -1,0 +1,276 @@
+/* --- DEFINISI WARNA TEMA HIJAU GELAP --- */
+:root {
+    --primary-dark: #1a3a3a; /* Hijau paling gelap, untuk tombol utama dan header */
+    --primary-color: #2F4F4F; /* Hijau gelap standar, untuk teks utama/border aktif */
+    --accent-color: #00796B; /* Aksen Hijau Teal BARU & TEGAS */
+    --light-bg: #F0F4F7; /* Background utama: Abu-abu sangat muda */
+    --input-bg-color: #FFFFFF; /* Background input: Putih */
+    --border-color-light: #CFD8DC; /* Border input: Abu-abu terang */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Shadow lebih gelap */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: #333;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+/* Header Section */
+.header-section {
+    background: var(--primary-dark);
+    padding: 40px 20px 60px !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+.logo-container img {
+    max-width: 100px;
+    height: auto;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+}
+.header-section h1 {
+    font-size: 2.2rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.header-section p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 2;
+}
+/* Card Form */
+.card {
+    border: none;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 15px 40px var(--shadow-color);
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+    transition: box-shadow 0.3s ease;
+}
+h5.text-dark-blue {
+    color: var(--primary-color) !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding-bottom: 5px;
+    border-bottom: 3px solid var(--accent-color);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+.step-indicator .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    position: relative;
+    z-index: 1;
+}
+.step-indicator .step-circle {
+    width: 35px;
+    height: 35px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    z-index: 10;
+    transition: background-color 0.3s;
+    border: 3px solid white;
+}
+
+/* Input Fields */
+.form-control, .form-select, textarea {
+    height: 55px;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 15px;
+    font-size: 0.95rem;
+    background-color: var(--input-bg-color);
+    transition: all 0.3s ease;
+}
+
+textarea.form-control {
+    height: auto !important;
+    min-height: 100px;
+    padding: 15px 20px;
+}
+
+/* ----------------------------------------------------- */
+/* --- PERBAIKAN KRITIS: MENGUBAH BIRU BAWAAN KE HIJAU --- */
+/* ----------------------------------------------------- */
+/* 1. MENGGANTI GARIS/SHADOW BIRU SAAT INPUT FOKUS (TERMASUK DROPDOWN) */
+.form-control:focus, 
+.form-select:focus,
+textarea:focus {
+    border-color: var(--accent-color); /* Border HIJAU */
+    /* Mengganti box-shadow biru bawaan Bootstrap */
+    box-shadow: 0 0 0 0.25rem rgba(0, 121, 107, 0.25); /* Shadow HIJAU */
+}
+/* 2. MENGGANTI WARNA RADIO/CHECKBOX SAAT TERPILIH (Titik Biru Bawaan) */
+.form-check-input:checked {
+    background-color: var(--accent-color); /* Background HIJAU */
+    border-color: var(--accent-color); /* Border HIJAU */
+}
+/* Memastikan warna centang list persyaratan di Step 1 juga hijau */
+.text-success {
+    color: var(--accent-color) !important;
+}
+
+/* 3. MENGGANTI WARNA ALERT (jika ada alert-info yang berwarna biru muda) */
+.alert-info {
+    --bs-alert-bg: #e0f2f1;
+    --bs-alert-color: var(--primary-color);
+    --bs-alert-border-color: #b2dfdb;
+}
+
+/* ----------------------------------------------------- */
+/* --- PERBAIKAN STYLING KHUSUS UNTUK DROPDOWN TAHUN --- */
+/* ----------------------------------------------------- */
+.input-year-container {
+    position: relative;
+}
+
+/* Dropdown custom */
+.year-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 100%;
+    padding: 0;
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+    max-height: 250px;
+    overflow-y: auto;
+    display: none; /* Awalnya tersembunyi */
+}
+.year-dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 8px 20px;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    transition: background-color 0.15s ease-in-out;
+    cursor: pointer;
+}
+.year-dropdown-item:hover,
+.year-dropdown-item.selected {
+    color: #fff;
+    background-color: var(--accent-color);
+}
+/* Ikon Kalender Kustom */
+.input-year-container .form-control {
+    cursor: pointer; /* Menunjukkan bahwa input dapat diklik */
+}
+
+.input-year-container::after {
+    font-family: "bootstrap-icons";
+    content: "\f282"; /* bi-caret-down-fill (panah ke bawah) */
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    pointer-events: none; 
+    font-size: 1.2rem;
+    z-index: 5;
+}
+
+/* Label dengan Icon */
+.form-label.icon-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; 
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.icon-label i {
+    margin-right: 10px;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    width: 24px;
+    display: inline-flex;
+    justify-content: center;
+}
+.required-asterisk {
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-left: 3px;
+    font-size: 1.1rem;
+}
+/* Custom Button */
+.custom-button {
+    background: var(--primary-dark);
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.btn-secondary-custom {
+    background-color: #f8f8f8 !important;
+    color: var(--primary-color) !important;
+    border: 1px solid var(--border-color-light) !important;
+    border-radius: 15px !important;
+    font-weight: 500 !important;
+    padding: 15px 30px;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 576px) {
+    .btn-group-nav {
+        flex-direction: column;
+        gap: 15px !important;
+    }
+}
